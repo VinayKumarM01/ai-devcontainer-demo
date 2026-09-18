@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
         TodoList todoList = new TodoList();
         try (Scanner scanner = new Scanner(System.in)) {
-            System.out.println("Todo CLI. Commands: add <text>, list, delete <id>, exit");
+            printOptions();
             while (true) {
                 System.out.print("> ");
                 String line = scanner.nextLine().trim();
@@ -19,6 +19,7 @@ public class Main {
                 String command = parts[0];
 
                 switch (command) {
+                    case "help" -> printOptions();
                     case "add" -> {
                         if (parts.length < 2) {
                             System.out.println("Usage: add <text>");
@@ -45,5 +46,17 @@ public class Main {
         } catch (NumberFormatException e) {
             System.out.println("Invalid id: must be a number");
         }
+    }
+
+    private static void printOptions() {
+        System.out.println("------------------------------");
+        System.out.println("Todo CLI");
+        System.out.println("Available options:");
+        System.out.println("  add <text>    Add a todo");
+        System.out.println("  list          Show all todos");
+        System.out.println("  delete <id>   Delete a todo");
+        System.out.println("  help          Show available options");
+        System.out.println("  exit          Exit the application");
+        System.out.println("------------------------------");
     }
 }
